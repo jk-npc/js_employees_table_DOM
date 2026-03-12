@@ -143,8 +143,8 @@ form.addEventListener('submit', (e) => {
     !employeeName ||
     !position ||
     !office ||
-    !ageValue === '' ||
-    !salaryValue === ''
+    ageValue === '' ||
+    salaryValue === ''
   ) {
     showNotification('error', 'All fields are required');
 
