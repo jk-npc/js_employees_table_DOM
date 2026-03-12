@@ -111,7 +111,7 @@ form.innerHTML = `
   <button type="submit">Save to table</button>
 `;
 
-document.body.prepend(form);
+document.body.append(form);
 
 /** notification */
 function showNotification(type, text) {
@@ -136,14 +136,23 @@ form.addEventListener('submit', (e) => {
   const employeeName = form.name.value.trim();
   const position = form.position.value.trim();
   const office = form.office.value;
-  const age = Number(form.age.value);
-  const salary = Number(form.salary.value);
+  const ageValue = form.age.value;
+  const salaryValue = form.salary.value;
 
-  if (!employeeName || !position || !office || !age || !salary) {
+  if (
+    !employeeName ||
+    !position ||
+    !office ||
+    !ageValue === '' ||
+    !salaryValue === ''
+  ) {
     showNotification('error', 'All fields are required');
 
     return;
   }
+
+  const age = Number(ageValue);
+  const salary = Number(salaryValue);
 
   if (employeeName.length < 4) {
     showNotification('error', 'Name must have at least 4 letters');
@@ -206,9 +215,7 @@ tbody.addEventListener('dblclick', (e) => {
   input.focus();
 
   const save = () => {
-    const newValue = input.value.trim();
-
-    cell.textContent = newValue || oldValue;
+    cell.textContent = input.value.trim() || oldValue;
 
     editingCell = null;
   };
